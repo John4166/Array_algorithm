@@ -63,7 +63,7 @@ function fastSort(arr) {
 ````
 
 ##3.deepcopy-数组深度拷贝
-、、、
+````
   function deepcopy(arr) {
         var out = [],i = 0,len = arr.length;
         for (; i < len; i++) {
