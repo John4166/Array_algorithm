@@ -16,7 +16,7 @@
 ##数组排序
 ###1.冒泡排序法
 冒泡排序法其实就是双循环比较，用arr[0]和arr[1]...[arr.length-1]比较，如果arr[0],比较大，arr[0]和比较的数换位，以此类推
-、、、
+````
 function maopaoSort(arr) {
         for(var i=0;i<arr.length;i++){
             for(var j=i+1;j<arr.length;j++){
@@ -29,7 +29,7 @@ function maopaoSort(arr) {
         }
         return arr;
     }
-、、、
+````
 ###2.快速排序法
 快速排序法就是二分法+递归方法
 、、、
