@@ -6,10 +6,11 @@
 1.sort                 ---数组排序法，包括冒泡排序、快速排序、原生sort()
 2.deepcopy             ---数组的深度拷贝
 3.quchong              ---数组的去重
-4.maxIndex             ---判断一个字符串中出现次数最多的字符，统计这个次数
-5.random               ---产生一个数组，数组的值是min到max之间的数，随机排列
-6.indexOf              ---es5新的数组方法重写，包括indexOf，every，forEach，map
-7.deleteValue          ---删除数组中指定的值，返回删除后的数组
+4.random               ---产生一个数组，数组的值是min到max之间的数，随机排列
+5.indexOf              ---es5新的数组方法重写，包括indexOf，every，forEach，map
+6.deleteValue          ---删除数组中指定的值，返回删除后的数组
+7.maxIndex             ---判断一个字符串中出现次数最多的字符，统计这个次数
+
 
 ````
 
@@ -124,8 +125,8 @@ Math.floor(Math.random().len+min)
             var array=[];
             var len=max-min+1;
             while(true){
-                var random=Math.floor(Math.random()*len+min);//Math().floor()生成[min,max],Math.ceil()方法生成[min,max+1]的数组
-                if(array.inArray(random)){
+                var random=Math.floor(Math.random()*len+min);
+                 if(array.inArray(random)){
                     continue;
                 }else{
                     array.push(random);
@@ -188,7 +189,7 @@ Array.prototype.MyindexOf=function(query){
 ###forEach(item,index,list) --item-当前项，index-当前项索引，list-被遍历的数组
 ````
 Array.prototype.MyforEach= function (callback, content) {
-    content=content||window;
+    content=content||window; //在严格模式下，不写这句，会报错
     if(typeof callback==="function"){
         for(let i=0;i<this.length;i++){
             callback.call(content,this[i],i,this)
@@ -218,10 +219,12 @@ arr.MyforEach(function (item,index) {
 ````
 则，this指向了{a:7}这个对象
 
+5.如果是严格模式，content=content ||window这句不写就会报错
+
 ###every
 ````
 Array.prototype.Myevery= function (callback,content) {
-    content=content||window; //在严格模式下，不写这句，会报错
+    content=content||window;
     var passed=true;
     if(typeof callback==="function"){
         for(let i=0,len=this.length;i<len;i++){
@@ -237,15 +240,49 @@ Array.prototype.Myevery= function (callback,content) {
 ````
 调用方法
 ````
-window.a=7; //说明挂载到window上
 var ttevery=arr.Myevery(function (item,index) {
-    console.log(this);//window{a:7}
     return item<this.a;
 });
 ````
+###map()
+````
+Array.prototype.Mymap= function (callback, content) {
+    content=content||window;
+    let newArray=[];
+    if(typeof callback==="function"){
+        for(let i=0;i<this.length;i++){
+            let val=callback.call(content,this[i],i,this);
+            //if(!!val){
+            //    newArray[newArray.length]=val; //如果条件查询的结果为undefined的话，就不赋值进来了,如果没写，mapArr=[undefined,undefined ...,4,5,6,5,4,undefined ...]
+            //}
+            newArray[newArray.length]=val;
+        }
+    }
+    return newArray
 
+}
+````
 
+##6.arr.deteleValue(val)
+删除数组中的指定值，并返回删除后的数组
 
+````
+Array.prototype.deleteValue= function (val) {
+    var arr=this,i=0,index=-1;
+    for(;i<arr.length;i++){
+        if(arr[i]===val){
+            index=i
+        }
+    }
+    arr.splice(index,1);
+    var result=[];
+    result=arr;
+    return result
+}
+````
+
+7.判断字符串中出现次数最多的值以及出现次数
+写得太长了，就不符上代码了，可以自行查看maxIndex这个页面
 
 
 
