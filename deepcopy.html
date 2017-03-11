@@ -6,11 +6,12 @@
 </head>
 <body>
 <script>
+    //判断是否为数组
     function isArray(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
 
     }
-        function deepcopy(arr) {
+    function deepcopy(arr) {
         var out = [],i = 0,len = arr.length;
         for (; i < len; i++) {
             if (isArray(arr[i])){
