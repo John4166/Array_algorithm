@@ -9,7 +9,6 @@
 4.random               ---产生一个数组，数组的值是min到max之间的数，随机排列
 5.indexOf              ---es5新的数组方法重写，包括indexOf，every，forEach，map
 6.deleteValue          ---删除数组中指定的值，返回删除后的数组
-7.maxIndex             ---判断一个字符串中出现次数最多的字符，统计这个次数
 
 
 ````
@@ -281,8 +280,6 @@ Array.prototype.deleteValue= function (val) {
 }
 ````
 
-7.判断字符串中出现次数最多的值以及出现次数
-写得太长了，就不符上代码了，可以自行查看maxIndex这个页面
 
 
 
