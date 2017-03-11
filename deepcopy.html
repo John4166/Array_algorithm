@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>深度拷贝</title>
+</head>
+<body>
+<script>
+    function isArray(obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+
+    }
+        function deepcopy(arr) {
+        var out = [],i = 0,len = arr.length;
+        for (; i < len; i++) {
+            if (isArray(arr[i])){
+                out[i] = deepcopy(arr[i]);
+            }
+            //有递归调用的，先不看，先看不调用的部分
+            else{out[i] = arr[i];}
+        }
+        return out;
+    }
+
+    //使用
+
+    var arr1 = [[1,2,3],2,3,4,5];
+
+    var arr2 = deepcopy(arr1);
+
+
+
+
+</script>
+</body>
+</html>

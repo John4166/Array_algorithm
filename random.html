@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>产生一个数组，数组的值是min到max之间的数，随机排列</title>
+</head>
+<body>
+<!--难点,随机数*len，就可以生成len个随机数 ,Math.random()生成[0,1)的数，包括0 ，但不包括1-->
+    <script>
+
+        //判断value是否存在数组当中
+        Array.prototype.inArray= function (val) {
+            var arr=this;
+//            if(!Array.prototype.toString.call(arr)==="[Object Array]") return ; //其实不用这句，方法是加在数组的原型上的
+            var flag=false;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]===val){
+                    flag=true;
+                }
+            }
+            return flag
+        }
+        //生成min到max之间的随机整数
+        function createRandomNum(min,max){
+            var array=[];
+            var len=max-min+1;
+            while(true){
+                var random=Math.floor(Math.random()*len+min);//Math().floor()生成[min,max],Math.ceil()方法生成[min,max+1]的数组
+                if(array.inArray(random)){
+                    continue;
+                }else{
+                    array.push(random);
+                    if(array.length==len){
+                        break;
+                    }
+                }
+            }
+            return array;
+        }
+
+        //快速排序法
+        Array.prototype.fastSort= function () {
+//            if(!Array.prototype.toString.call(this)==="[Object Array]") return ;
+            var arr=this;
+            if(arr.length<=1) return arr;
+            var index=Math.floor(arr.length/2);
+            var MiddleVal=arr.splice(index,1);
+            var left=[],right=[];
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]>MiddleVal){
+                    right.push(arr[i])
+                }else{
+                    left.push(arr[i])
+                }
+            }
+            return left.fastSort().concat(MiddleVal,right.fastSort())
+
+
+        }
+
+        console.log(createRandomNum(2,32).fastSort());
+
+        //方法二，自己循环生成一个有序的数组，然后用随机数做索引随机打乱排序
+        function createArray(min, max) {
+            var result = []; //随机排序后的数组
+            var areaArray = [];  //循环生成[min,max]的数组
+            for(let i =min;i<=max;i++){
+                areaArray.push(i);
+            }
+            var len=areaArray.length;//长度要先获取，不然在循环中设置，数组长度会不断改变
+            for(let i = 0; i < len; i++) {
+                var randomIndex = parseInt(areaArray.length * Math.random());
+                result.push(areaArray[randomIndex]);
+                areaArray.splice(randomIndex,1);  //删除已经放到result的数
+            }
+            return result;
+        }
+        console.log(createArray(2,32))
+    </script>
+
+</body>
+</html>

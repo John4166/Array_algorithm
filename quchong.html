@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+<script>
+    //9，编写一个方法 去掉一个数组的重复元素
+     var arr = [1,2,3,1,43,12,12,1,2,3];
+
+    function removeReplace(arr){
+        var json = {};
+        var outArr=[];
+        for(var i=0;i<arr.length;i++){
+            if(!json[arr[i]]){
+                outArr.push(arr[i]);
+                json[arr[i]]=true
+            }
+        }
+        return outArr
+    }
+
+//     console.log(removeReplace(arr))
+
+    //巧用this+prototype
+    Array.prototype.unique= function () {
+        var json = {};
+        var outArr=[];
+        for(var i=0;i<this.length;i++){
+            if(!json[this[i]]){
+                outArr.push(this[i]);
+                json[this[i]]=true
+            }
+        }
+        return outArr
+    }
+    console.log(arr.unique());
+
+    //不建议的双循环方法
+    function unique(arr){
+        for(i = 0; i < arr.length; i++){
+            for(j = i+1; j < arr.length; j++){
+                if(arr[i] == arr[j]){
+                    arr.splice(j,1);
+                    j--;
+                }
+            }
+        }
+    }
+    var arr2 = [1,2,3,4,3,2,5,1,5];
+
+    console.log(unique(arr2));
+
+    //数组中最大差值
+    function getMaxProfit(arr){
+        var min = arr[0],
+                max = arr[0];
+        for(var i = 0; i < arr.length; i++){
+            if(arr[i] < min) min = arr[i];
+            if(arr[i] > max) max = arr[i];
+        }
+        return max - min;
+    }
+</script>
+</body>
+</html>
