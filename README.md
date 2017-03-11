@@ -251,9 +251,6 @@ Array.prototype.Mymap= function (callback, content) {
     if(typeof callback==="function"){
         for(let i=0;i<this.length;i++){
             let val=callback.call(content,this[i],i,this);
-            //if(!!val){
-            //    newArray[newArray.length]=val; //如果条件查询的结果为undefined的话，就不赋值进来了,如果没写，mapArr=[undefined,undefined ...,4,5,6,5,4,undefined ...]
-            //}
             newArray[newArray.length]=val;
         }
     }
